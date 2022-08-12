@@ -1,0 +1,92 @@
+# This is a basic workflow to help you get started with Actions
+
+name: Build and Text
+
+# Controls when the workflow will run
+on:
+  # Triggers the workflow on push or pull request events but only for the "main" branch
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  test:
+    runs-on: ubuntu-latest
+  # This workflow contains a single job called "build"
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+
+      - name: Checkout code
+        uses: actions/checkout@v3
+      - name: Set up Python Environment
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.x'
+      - name: Install DEpendencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+      - name: Run Tests
+        run : |
+          python manage.py test
+  
+  deploy:
+    needs: [test]
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout source code
+      uses: actions/checkout@v3
+
+    - name: Install SSH Key
+      uses: shimataro/ssh-key-action@v2
+      with:
+        key: ${{ secrets.SSH_PRIVATE_KEY }}
+        known_hosts: unnecessary
+
+    - name: Adding Known Hosts
+      run: ssh-keyscan -p 22 -H 172.104.62.106  >> ~/.ssh/known_hosts
+    #key updatedd kngsrz
+    - name: SSH to server
+      uses: appleboy/ssh-action@v0.1.5
+      with:
+        host: 172.104.62.106
+        username: ${{ secrets.SSH_USERNAME }}
+        key: ${{ secrets.SSH_PRIVATE_KEY }}
+        port: 22
+        script: |
+          source /home6/gyannhub/virtualenv/nanu_django/3.8/bin/activate && cd /home6/gyannhub/nanu_django
+          git pull origin main
+          git status
+          python manage.py collectstatic --noinput
+          pip install -r requirements.txt
+          python manage.py makemigrations
+          python manage.py migrate
+
+
+
+
+
+
+    # - name: Sync files
+    #   uses: SamKirkland/FTP-Deploy-Action@4.1.0
+    #   with:
+    #     server: ftp.gyannhub.com
+    #     username: ${{ secrets.USERNAME }}
+    #     password: ${{ secrets.PASSWORD }}
+    #     exclude: |
+    #       **/.git*
+    #       **/.git*/**
+    #       **/media/**
+    #       **/__pycache/**
+    #       **/__staticfiles/**
+    #       **/node_modules/**
+    #     server-dir: /
+
+          
