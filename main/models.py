@@ -47,6 +47,7 @@ class Product(models.Model):
         return self.title
 
 
+
 class Product_image(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
     image = models.FileField(null=True, blank=True)
@@ -82,6 +83,7 @@ class Order(models.Model):
 
     def __str__(self):
         return f'Order {self.id}'
+
 
     def get_total_cost(self):
         return sum(item.get_cost() for item in self.items.all())

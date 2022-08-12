@@ -25,3 +25,8 @@ urlpatterns = [
 
 urlpatterns += static(settings.MEDIA_URL,
                           document_root=settings.MEDIA_ROOT)
+# default: "Django Administration"
+admin.site.site_header = 'Nanu Stores'
+# default: "Site administration"
+admin.site.index_title = 'Admin Panel, Nanu Stores'
+admin.site.site_title = 'Nanu Stores'  # default: "Django site admin"title

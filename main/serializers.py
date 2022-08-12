@@ -19,13 +19,13 @@ class ProductCategorySerializers(serializers.ModelSerializer):
         lookup_field = 'slug'
 
 
-
 class ProductThumbnailSerializers(serializers.ModelSerializer):
     thumbnail = serializers.ImageField(max_length=None, use_url=True, allow_null=True, required=False)
     class Meta:
         model = Product
         fields = ('thumbnail',)
         lookup_field = 'slug'
+
 
 class ProductImageSerailizers(serializers.ModelSerializer):
     image = serializers.ImageField(max_length=None, use_url=True, allow_null=True, required=False)
