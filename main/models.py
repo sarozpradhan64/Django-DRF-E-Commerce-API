@@ -11,7 +11,7 @@ class Product_category(models.Model):
     title = models.CharField(max_length=250)
     slug = models.SlugField(max_length=250, unique=True)
     description = models.CharField(max_length=3000, null=True, blank=True)
-    thumbnail = models.ImageField()
+    thumbnail = models.ImageField(upload_to='category/thumbnails', blank=True, null=True)
 
     def __str__(self):
         return self.title
