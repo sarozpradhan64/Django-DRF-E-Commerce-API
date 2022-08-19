@@ -14,5 +14,6 @@ urlpatterns = [
     path('category', ProductCategoryListView.as_view(), name='category'),
     path('category/<slug:slug>',
          CategoryProductsView.as_view(), name="category_product"),
+         
     path('carousel', CarouselListView.as_view(), name="carousel")
 ]

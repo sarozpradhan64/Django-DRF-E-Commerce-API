@@ -43,6 +43,7 @@ class ProductCategoryListView(generics.ListAPIView):
     lookup_field = 'slug'
     permission_classes = (permissions.AllowAny, )
 
+# product with caterories
 class CategoryProductsView(APIView):
     def get(self, request, slug=None, format=None):
         category = get_object_or_404(Product_category, slug = slug)
