@@ -13,20 +13,22 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+from argparse import Namespace
 from django.conf import settings
 from django.contrib import admin
 from django.urls import include, path
 from django.conf.urls.static import static
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('', include('main.urls'))
+     path('api/', include('main.urls')),
+    path('', admin.site.urls)
+   
 ]
 
 
 urlpatterns += static(settings.MEDIA_URL,
                           document_root=settings.MEDIA_ROOT)
 # default: "Django Administration"
-admin.site.site_header = 'Nanu Stores'
+admin.site.site_header = 'Nanu Stores Admin'
 # default: "Site administration"
 admin.site.index_title = 'Admin Panel, Nanu Stores'
 admin.site.site_title = 'Nanu Stores'  # default: "Django site admin"title
