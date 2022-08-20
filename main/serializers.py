@@ -5,12 +5,19 @@ from rest_framework import serializers
 from .models import Product, Product_category, Carousel, Product_image
 
 
+
+
 class ProductSerializers(serializers.ModelSerializer):
-    thumbnail = serializers.ImageField(max_length=None, use_url=True, allow_null=True, required=False)
+    thumbnail = serializers.SerializerMethodField()
     class Meta:
         model= Product
         exclude = ['cost_price',]
         lookup_field = 'slug'
+
+    def get_thumbnail(self, Product):
+        request = self.context.get('request')
+        thumbnail = Product.thumbnail.url
+        return request.build_absolute_uri(thumbnail)
 
 class ProductCategorySerializers(serializers.ModelSerializer):
     class Meta:
@@ -19,6 +26,8 @@ class ProductCategorySerializers(serializers.ModelSerializer):
         lookup_field = 'slug'
 
 
+
+# serializing both thumbnail and images for the carousel
 class ProductThumbnailSerializers(serializers.ModelSerializer):
     thumbnail = serializers.ImageField(max_length=None, use_url=True, allow_null=True, required=False)
     class Meta:
