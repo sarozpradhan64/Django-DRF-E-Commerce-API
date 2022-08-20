@@ -8,16 +8,11 @@ from .models import Product, Product_category, Carousel, Product_image
 
 
 class ProductSerializers(serializers.ModelSerializer):
-    thumbnail = serializers.SerializerMethodField()
+    thumbnail = serializers.ImageField(max_length=None, use_url=True, allow_null=True, required=False)
     class Meta:
         model= Product
         exclude = ['cost_price',]
         lookup_field = 'slug'
-
-    def get_thumbnail(self, Product):
-        request = self.context.get('request')
-        thumbnail = Product.thumbnail.url
-        return request.build_absolute_uri(thumbnail)
 
 class ProductCategorySerializers(serializers.ModelSerializer):
     class Meta:
