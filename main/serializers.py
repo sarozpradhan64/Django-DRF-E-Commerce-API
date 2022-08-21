@@ -8,12 +8,12 @@ from .models import Product, Product_category, Carousel, Product_image
 
 
 class ProductSerializers(serializers.ModelSerializer):
-    thumbnail = serializers.ImageField(max_length=None, use_url=True, allow_null=True, required=False)
     class Meta:
         model= Product
         exclude = ['cost_price',]
         lookup_field = 'slug'
 
+# serializing category
 class ProductCategorySerializers(serializers.ModelSerializer):
     class Meta:
         model= Product_category
