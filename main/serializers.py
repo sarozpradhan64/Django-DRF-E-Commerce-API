@@ -5,27 +5,30 @@ from rest_framework import serializers
 from .models import Product, Product_category, Carousel, Product_image
 
 
-
-
 class ProductSerializers(serializers.ModelSerializer):
-    thumbnail = serializers.ImageField(max_length=None, use_url=True, allow_null=True, required=False)
+    thumbnail = serializers.ImageField(
+        max_length=None, use_url=False, allow_null=True, required=False)
+
     class Meta:
-        model= Product
-        exclude = ['cost_price',]
+        model = Product
+        exclude = ['cost_price', ]
         lookup_field = 'slug'
 
 # serializing category
+
+
 class ProductCategorySerializers(serializers.ModelSerializer):
     class Meta:
-        model= Product_category
-        fields ="__all__"
+        model = Product_category
+        fields = "__all__"
         lookup_field = 'slug'
-
 
 
 # serializing both thumbnail and images for the carousel
 class ProductThumbnailSerializers(serializers.ModelSerializer):
-    thumbnail = serializers.ImageField(max_length=None, use_url=True, allow_null=True, required=False)
+    thumbnail = serializers.ImageField(
+        max_length=None, use_url=True, allow_null=True, required=False)
+
     class Meta:
         model = Product
         fields = ('thumbnail',)
@@ -33,14 +36,16 @@ class ProductThumbnailSerializers(serializers.ModelSerializer):
 
 
 class ProductImageSerailizers(serializers.ModelSerializer):
-    image = serializers.ImageField(max_length=None, use_url=True, allow_null=True, required=False)
+    image = serializers.ImageField(
+        max_length=None, use_url=True, allow_null=True, required=False)
+
     class Meta:
         model = Product_image
-        fields= "__all__"
-        lookup_field='slug'
-        
+        fields = "__all__"
+        lookup_field = 'slug'
+
+
 class CarouselSerializers(serializers.ModelSerializer):
     class Meta:
         model = Carousel
         fields = "__all__"
-
