@@ -1,4 +1,4 @@
-from django.shortcuts import get_object_or_404, render
+from django.shortcuts import get_object_or_404, render, redirect
 # rest_framework views
 from rest_framework import generics, permissions, authentication
 from rest_framework.views import APIView
@@ -13,6 +13,9 @@ from django.template.loader import render_to_string
 import os
 import weasyprint
 
+# redirect home page to the admin 
+def redirect_admin(request):
+    return redirect('admin/')
 
 def admin_order_pdf(request, order_id):
     # return HttpResponse('tsex')

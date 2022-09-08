@@ -3,7 +3,7 @@ from secrets import choice
 from unicodedata import category
 from django.db import models
 from django.utils import timezone
-
+from django_resized import ResizedImageField
 # Create your models here.
 
 
@@ -11,7 +11,7 @@ class Product_category(models.Model):
     title = models.CharField(max_length=250)
     slug = models.SlugField(max_length=250, unique=True)
     description = models.CharField(max_length=3000, null=True, blank=True)
-    thumbnail = models.ImageField(upload_to='category/thumbnails', blank=True, null=True)
+    thumbnail = ResizedImageField(size=[500,500],scale=None,quality=75, upload_to='category/thumbnails', force_format="PNG",blank=True, null=True)
 
     def __str__(self):
         return self.title
@@ -23,7 +23,7 @@ class Product(models.Model):
     category = models.ForeignKey(
         Product_category, on_delete=models.SET_NULL, null=True)
     description = models.TextField(max_length=3000)
-    thumbnail = models.ImageField(upload_to="products/thumbnail")
+    thumbnail = ResizedImageField(size=[500,500], scale=None, quality=75, upload_to='products/thumbnail',force_format="PNG", blank=True, null=True)
     cost_price = models.DecimalField(
         max_digits=8, decimal_places=2, null=True, blank=True)
     marked_price = models.DecimalField(max_digits=8, decimal_places=2)
@@ -47,10 +47,13 @@ class Product(models.Model):
         return self.title
 
 
+# custom path for product images upload
+def product_images_upload_to(instance, filename):
+    return 'products/images/%s' %(instance.product, filename)
 
 class Product_image(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
-    image = models.FileField(null=True, blank=True)
+    thumbnail = ResizedImageField(size=[500,500], scale=None, quality=75, upload_to=product_images_upload_to, force_format="PNG", blank=True, null=True)
     alt_text = models.CharField(max_length=150, null=True, blank=True)
 
 
@@ -67,8 +70,6 @@ class Carousel(models.Model):
 
 
 # order models
-
-
 class Order(models.Model):
     paid = models.BooleanField(default=False)
     c_name = models.CharField(max_length=250)

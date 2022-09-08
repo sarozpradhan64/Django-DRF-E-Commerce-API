@@ -3,6 +3,7 @@ from .views import CategoryProductsView, ProductListView, ProductCategoryListVie
 from . import views
 
 urlpatterns = [
+     
     path('order/<int:order_id>/pdf',
          views.admin_order_pdf,
          name='admin_order_pdf'),
