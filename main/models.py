@@ -49,11 +49,11 @@ class Product(models.Model):
 
 # custom path for product images upload
 def product_images_upload_to(instance, filename):
-    return 'products/images/%s' %(instance.product, filename)
+    return 'products/images/%s/%s'%(instance.product, filename)
 
 class Product_image(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
-    thumbnail = ResizedImageField(size=[500,500], scale=None, quality=75, upload_to=product_images_upload_to, force_format="PNG", blank=True, null=True)
+    image = ResizedImageField(size=[500,500], scale=None, quality=75, upload_to=product_images_upload_to, force_format="PNG", blank=True, null=True)
     alt_text = models.CharField(max_length=150, null=True, blank=True)
 
 
