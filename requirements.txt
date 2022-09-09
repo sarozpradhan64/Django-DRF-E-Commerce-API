@@ -25,6 +25,7 @@ django-quill-editor==0.1.40
 django-resized==1.0.2
 django-taggit==2.1.0
 django-tinymce==3.4.0
+django-vite==2.0.2
 djangorestframework==3.13.1
 et-xmlfile==1.1.0
 ez-setup==0.9
