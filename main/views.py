@@ -13,9 +13,23 @@ from django.template.loader import render_to_string
 import os
 import weasyprint
 
+from inertia import render
+
+
 # redirect home page to the admin 
 def redirect_admin(request):
     return redirect('admin/')
+
+
+def home(request):
+    return render(request, 'Index', props = {
+        'events':['Django hello guys', 'testing django react']
+    })
+
+def login(request):
+    name = 'Nanu Stores'
+    return render(request, 'Login', props= {'events':[name], 'name':name} )
+
 
 def admin_order_pdf(request, order_id):
     # return HttpResponse('tsex')
@@ -27,6 +41,10 @@ def admin_order_pdf(request, order_id):
     weasyprint.HTML(string=html).write_pdf(response, stylesheets=[weasyprint.CSS(settings.STATIC_ROOT + 'css/pdf.css')])
     return response
 
+
+
+
+#------------------------------------------------------------------------------------------
 # api views
 class ProductListView(generics.ListAPIView):
     queryset = Product.objects.filter(state=True).order_by('-publish')

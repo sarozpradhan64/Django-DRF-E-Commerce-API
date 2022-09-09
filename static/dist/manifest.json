@@ -1,0 +1,34 @@
+{
+  "js/main.jsx": {
+    "file": "main.4a0f9204.js",
+    "src": "js/main.jsx",
+    "isEntry": true,
+    "dynamicImports": [
+      "js/pages/Index.jsx",
+      "js/pages/Login.jsx"
+    ],
+    "css": [
+      "main.ab2e822c.css"
+    ]
+  },
+  "js/pages/Index.jsx": {
+    "file": "Index-993afb34.js",
+    "src": "js/pages/Index.jsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "js/main.jsx"
+    ]
+  },
+  "js/pages/Login.jsx": {
+    "file": "Login-b8990888.js",
+    "src": "js/pages/Login.jsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "js/main.jsx"
+    ]
+  },
+  "js/main.css": {
+    "file": "main.ab2e822c.css",
+    "src": "js/main.css"
+  }
+}

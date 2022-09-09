@@ -20,9 +20,8 @@ from django.urls import include, path
 from django.conf.urls.static import static
 from main import views
 urlpatterns = [
-     path('api/', include('main.urls')),
+     path('', include('main.urls')),
     path('admin/', admin.site.urls),
-    path('', views.redirect_admin)
 ]
 
 
