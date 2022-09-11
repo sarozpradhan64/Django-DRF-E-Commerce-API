@@ -17,7 +17,7 @@ module.exports = {
     },
   },
   resolve: {
-    extensions: ['.js', '.json'],
+    extensions: ['.js', '.json', '.jsx'],
   },
   build: {
     outDir: resolve('./static/dist'),
