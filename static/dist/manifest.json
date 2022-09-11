@@ -1,6 +1,6 @@
 {
   "js/main.jsx": {
-    "file": "main.4a0f9204.js",
+    "file": "main.e7f833f1.js",
     "src": "js/main.jsx",
     "isEntry": true,
     "dynamicImports": [
@@ -8,11 +8,11 @@
       "js/pages/Login.jsx"
     ],
     "css": [
-      "main.ab2e822c.css"
+      "main.56e67fa5.css"
     ]
   },
   "js/pages/Index.jsx": {
-    "file": "Index-993afb34.js",
+    "file": "Index-0325f1a8.js",
     "src": "js/pages/Index.jsx",
     "isDynamicEntry": true,
     "imports": [
@@ -20,7 +20,7 @@
     ]
   },
   "js/pages/Login.jsx": {
-    "file": "Login-b8990888.js",
+    "file": "Login-508f06c8.js",
     "src": "js/pages/Login.jsx",
     "isDynamicEntry": true,
     "imports": [
@@ -28,7 +28,7 @@
     ]
   },
   "js/main.css": {
-    "file": "main.ab2e822c.css",
+    "file": "main.56e67fa5.css",
     "src": "js/main.css"
   }
 }
